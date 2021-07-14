@@ -78,6 +78,9 @@ hosts_cloudinit_config:
 # enable cloud-init
 hosts_cloudinit_enable: false
 
+# git repositories to clone
+hosts_git_repositories: []
+
 # packages to install/remove
 hosts_packages: []
 
@@ -124,6 +127,9 @@ hosts_ssh_public_hosts: "{{ lookup('env','ANSIBLE_SSH_PUBLIC_HOSTS').split(' ') 
 
 # remote ssh user
 hosts_ssh_username: "{{ lookup('env','ANSIBLE_SSH_USERNAME') or ansible_user }}"
+
+# update hosts every day
+hosts_update: false
 
 # list of environment variables to write to user ~/.env
 hosts_user_env: []

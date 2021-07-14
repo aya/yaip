@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ### BEGIN INIT INFO
 # Provides: myos
 # Required-Start:
@@ -10,15 +10,11 @@
 
 set -e
 
-# load system configs
-[ -r /etc/default/myos ] && . /etc/default/myos
-[ -r /etc/sysconfig/myos ] && . /etc/sysconfig/myos
-
 # check system config
 [ -r ~/.env ] && . ~/.env || exit 1
 type make >/dev/null 2>&1 && [ -d "${MYOS}" ] || exit 2
 
 case "$1" in
   *)
-    IFS=$'\n'; exec env $(cat ~/.env 2>/dev/null) make -C "${MYOS}" $@
+    IFS=$'\n'; exec sh -c "cd ${MYOS} && exec make $@ $(cat /etc/default/myos ~/.env 2>/dev/null)"
 esac
